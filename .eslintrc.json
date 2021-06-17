@@ -1,0 +1,103 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "airbnb"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        "linebreak-style": 0,
+        "indent": "off",
+        "react/jsx-indent": "off",
+        "react/jsx-indent-props": "off",
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [
+                    ".js",
+                    ".jsx"
+                ]
+            }
+        ],
+        "react/prop-types": 0,
+        "no-trailing-spaces": [
+            "error",
+            {
+                "skipBlankLines": true
+            }
+        ],
+        "react/jsx-one-expression-per-line": "off",
+        "max-len": [
+            "error",
+            {
+                "code": 130
+            }
+        ],
+        "react/jsx-first-prop-new-line": [
+            1,
+            "never"
+        ],
+        "react/jsx-max-props-per-line": [
+            1,
+            {
+                "maximum": 3
+            }
+        ],
+        "react/jsx-closing-bracket-location": [
+            1,
+            "after-props"
+        ],
+        "arrow-body-style": [
+            "error",
+            "as-needed",
+            {
+                "requireReturnForObjectLiteral": true
+            }
+        ],
+        "comma-dangle": [
+            "error",
+            "never"
+        ],
+        "padded-blocks": [
+            "error",
+            {
+                "blocks": "always"
+            }
+        ],
+        "jsx-quotes": [
+            "error",
+            "prefer-single"
+        ],
+        "react/self-closing-comp": [
+            "error",
+            {
+                "component": true,
+                "html": false
+            }
+        ],
+        "no-plusplus": [
+            "error",
+            {
+                "allowForLoopAfterthoughts": true
+            }
+        ],
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+                "devDependencies": true
+            }
+        ]
+    }
+}
