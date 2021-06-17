@@ -1,7 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+const App = () => {
+
   return (
     <div className="App">
       <header className="App-header">
@@ -20,6 +21,30 @@ function App() {
       </header>
     </div>
   );
-}
 
-export default App;
+};
+
+const mapStateToProps = (state) => {
+
+  return {
+    score: state.score,
+    failed: state.score,
+    timePerMove: state.score
+  };
+
+};
+
+const mapDispatchToProps = (dispatch) => {
+
+  return {
+
+    incrementScore: (value) => dispatch(action.incrementScore(value)),
+    decrementScore: (value) => dispatch(action.decrementScore(value)),
+    setTimePerMove: (value) => dispatch(action.setTimePerMove(value)),
+    incremenFailCounter: (value) => dispatch(action.incremenFailCounter(value))
+
+  };
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
