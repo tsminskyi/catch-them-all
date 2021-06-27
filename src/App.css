@@ -3,3 +3,34 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+* li {
+  list-style-type: none;
+}
+
+.game-conteiner {
+  display: flex;
+  margin: auto;
+  height: auto;
+}
+
+.game-conteiner__bourd {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: red;
+}
+
+.game-conteiner__info {
+  background-color: green;
+}
+
+.game-conteiner__cell {
+  background-color: yellow;
+  cursor: pointer;
+  border: solid 0.5px;
+}
+
+.game-conteiner__cell img {
+  width: 100%;
+  height: 100%;
+}
