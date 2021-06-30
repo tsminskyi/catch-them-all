@@ -63,10 +63,10 @@ export const resetGameBoard = (value) => {
 
 };
 
-export const turn = (value) => {
+export const setGameStatus = (value) => {
 
     return {
-        type: actionType.TURN,
+        type: actionType.IS_GAME_ON,
         payload: value
     };
 

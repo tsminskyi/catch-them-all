@@ -80,11 +80,11 @@ const reducer = (state, action) => {
 
         }
 
-        case actionType.TURN: {
+        case actionType.IS_GAME_ON: {
 
             return {
 
-                ...state, flag: action.payload
+                ...state, isGameOn: action.payload
 
             };
 

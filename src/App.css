@@ -9,6 +9,7 @@
 }
 
 .game-conteiner {
+  position: relative;
   display: flex;
   margin: auto;
   height: auto;
@@ -33,4 +34,15 @@
 .game-conteiner__cell img {
   width: 100%;
   height: 100%;
+}
+
+.game-conteiner__menu {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(128, 128, 128, 0.753);
+}
+
+.game-conteiner .hidden {
+  display: none;
 }
