@@ -1,4 +1,5 @@
 import * as actionType from './action-types';
+import * as defaulte from '../enum/defaulteValue';
 import gameObj from '../enum/gameObj';
 
 const reducer = (state, action) => {
@@ -105,6 +106,19 @@ const reducer = (state, action) => {
             return {
 
                 ...state, timerID: action.payload
+
+            };
+
+        }
+
+        case actionType.RESET_GAME_VALUE: {
+
+            return {
+
+                ...state,
+                score: defaulte.minScore,
+                failed: defaulte.minLife,
+                timePerMove: defaulte.timePerMove
 
             };
 

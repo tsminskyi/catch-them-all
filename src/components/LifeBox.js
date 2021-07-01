@@ -1,6 +1,6 @@
 import React from 'react';
 import heart from '../img/life.svg';
-import heart1 from '../img/life copy.svg';
+import heartFail from '../img/life fail.svg';
 
 const LifeBox = (props) => {
 
@@ -8,13 +8,18 @@ const LifeBox = (props) => {
 
     return (
 
-        new Array(maxLifeCount).fill(heart, 0, maxLifeCount - failed).fill(heart1, maxLifeCount - failed).map((el) => (
+        new Array(maxLifeCount).fill(heart, 0, maxLifeCount - failed).fill(heartFail, maxLifeCount - failed).map((el, i) => {
 
-            <li>
-                <img src={el} alt='' />
-            </li>
+            const key = `key${i}`;
+            return (
 
-        ))
+                <li key={key}>
+                    <img src={el} alt='' />
+                </li>
+
+            );
+
+        })
     );
 
 };

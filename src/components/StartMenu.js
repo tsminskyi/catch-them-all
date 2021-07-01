@@ -5,7 +5,7 @@ import * as action from '../redux/action';
 const StartMenu = (props) => {
 
     const {
-        isGameOn, setGameStatus, resetGameBoard, setStartTime
+        isGameOn, setGameStatus, resetGameBoard, setStartTime, resetGameValue
     } = props;
 
     const getClassName = () => {
@@ -23,6 +23,7 @@ const StartMenu = (props) => {
                 setGameStatus(true);
                 resetGameBoard();
                 setStartTime();
+                resetGameValue();
 
             }}>Start
             </button>
@@ -46,8 +47,8 @@ const mapDispatchToProps = (dispatch) => {
 
         setGameStatus: (value) => dispatch(action.setGameStatus(value)),
         resetGameBoard: () => dispatch(action.resetGameBoard()),
-        setStartTime: () => dispatch(action.setStartTime())
-
+        setStartTime: () => dispatch(action.setStartTime()),
+        resetGameValue: () => dispatch(action.resetGameValue())
     };
 
 };

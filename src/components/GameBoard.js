@@ -17,11 +17,12 @@ const GameBoard = (props) => {
 
         if (maxLifeCount > failed && macsScore > score) {
 
-            const value = gameFilde[e.target.parentNode.id];
+            const elem = e.target.parentNode;
+            const value = gameFilde[elem.id];
             if (value === gameObj.mole) {
 
                 incrementScore(10);
-                setPositionGameObj(e.target.parentNode.id, gameObj.hole);
+                setPositionGameObj(elem.id, gameObj.hole);
                 resetGameBoard();
                 setStartTime();
                 if (score % 30 === 0) decremenTimePerMove(1);
@@ -30,10 +31,9 @@ const GameBoard = (props) => {
             if (value === gameObj.hole) {
 
                 incremenFailCounter(1);
-                // resetGameBoard();
-                // setStartTime();
 
             }
+            setTimeout(40);
 
         }
 
@@ -49,8 +49,10 @@ const GameBoard = (props) => {
                 gameFilde.map((elem, i) => {
 
                     const img = elem === gameObj.mole ? mole : hole;
+                    const key = `id${i}`;
                     return (
-                        <CellGame img={img} sizeBourdCell={sizeBourdCell} id={i} />
+                        <CellGame img={img} sizeBourdCell={sizeBourdCell}
+                            id={i} key={key} />
                     );
 
                 })
@@ -85,11 +87,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
 
         resetGameBoard: () => dispatch(action.resetGameBoard()),
-        setTimerID: (value) => dispatch(action.setTimerID(value)),
         setStartTime: (value) => dispatch(action.setStartTime(value)),
-        setGameStatus: (value) => dispatch(action.setGameStatus(value)),
         incrementScore: (value) => dispatch(action.incrementScore(value)),
-        decrementScore: (value) => dispatch(action.decrementScore(value)),
         decremenTimePerMove: (value) => dispatch(action.decremenTimePerMove(value)),
         incremenFailCounter: (value) => dispatch(action.incremenFailCounter(value)),
         setPositionGameObj: (pos, value) => dispatch(action.setPositionGameObj(pos, value))

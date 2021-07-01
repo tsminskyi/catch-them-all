@@ -89,3 +89,11 @@ export const setTimerID = (value) => {
     };
 
 };
+
+export const resetGameValue = () => {
+
+    return {
+        type: actionType.RESET_GAME_VALUE
+    };
+
+};
