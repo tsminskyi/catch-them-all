@@ -10,20 +10,20 @@ const App = (props) => {
 
   const {
     score, failed, timePerMove, resetGameBoard, setStartTime, startTime, setTimerID, timerID, sizeBoard,
-    macsScore, maxLifeCount, isGameOn, setGameStatus, incremenFailCounter
+    maxScore, maxLifeCount, isGameOn, setGameStatus, incremenFailCounter
   } = props;
   const sizeConteiner = window.innerWidth > window.innerHeight ? window.innerHeight * 0.9 : window.innerWidth * 0.9;
   const sizeInfo = sizeConteiner * 0.2;
   const widthBourd = sizeConteiner * 0.8;
   const sizeBourdCell = widthBourd / sizeBoard;
 
-  if (maxLifeCount <= failed || macsScore <= score) setGameStatus(false);
+  if (maxLifeCount <= failed || maxScore <= score) setGameStatus(false);
 
   useEffect(() => {
 
     if (timerID !== null) clearInterval(timerID);
 
-    if (isGameOn && maxLifeCount > failed && macsScore > score) {
+    if (isGameOn && maxLifeCount > failed && maxScore > score) {
 
       const id = setInterval(() => {
 
@@ -65,7 +65,7 @@ const mapStateToProps = (state) => {
     isGameOn: state.isGameOn,
     startTime: state.startTime,
     sizeBoard: state.sizeBoard,
-    macsScore: state.macsScore,
+    maxScore: state.maxScore,
     timePerMove: state.timePerMove,
     maxLifeCount: state.maxLifeCount
 

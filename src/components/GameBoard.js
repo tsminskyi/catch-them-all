@@ -9,31 +9,39 @@ import * as action from '../redux/action';
 const GameBoard = (props) => {
 
     const {
-        score, gameFilde, incrementScore, setPositionGameObj, resetGameBoard, maxLifeCount, failed, macsScore,
+        score, gameFilde, incrementScore, resetGameBoard, maxLifeCount, failed, maxScore,
         incremenFailCounter, setStartTime, decremenTimePerMove, sizeBourdCell, widthBourd
     } = props;
 
     const eventClick = (e) => {
 
-        if (maxLifeCount > failed && macsScore > score) {
+        const isLifeCountEnd = maxLifeCount > failed;
+        const isMaxScore = maxScore > score;
+        if (isLifeCountEnd && isMaxScore) {
 
             const elem = e.target.parentNode;
             const value = gameFilde[elem.id];
             if (value === gameObj.mole) {
 
                 incrementScore(10);
-                setPositionGameObj(elem.id, gameObj.hole);
-                resetGameBoard();
-                setStartTime();
+                e.target.classList.add('pass');
+                setTimeout(() => {
+
+                    resetGameBoard();
+                    setStartTime();
+                    e.target.classList.remove('pass');
+
+                }, 40);
                 if (score % 30 === 0) decremenTimePerMove(1);
 
             }
             if (value === gameObj.hole) {
 
                 incremenFailCounter(1);
+                e.target.classList.add('fail');
+                setTimeout(() => e.target.classList.remove('fail'), 40);
 
             }
-            setTimeout(40);
 
         }
 
@@ -69,13 +77,8 @@ const mapStateToProps = (state) => {
 
         score: state.score,
         failed: state.failed,
-        timerID: state.timerID,
-        isGameOn: state.isGameOn,
         gameFilde: state.gameFilde,
-        startTime: state.startTime,
-        sizeBoard: state.sizeBoard,
-        macsScore: state.macsScore,
-        timePerMove: state.timePerMove,
+        maxScore: state.maxScore,
         maxLifeCount: state.maxLifeCount
 
     };
@@ -90,8 +93,7 @@ const mapDispatchToProps = (dispatch) => {
         setStartTime: (value) => dispatch(action.setStartTime(value)),
         incrementScore: (value) => dispatch(action.incrementScore(value)),
         decremenTimePerMove: (value) => dispatch(action.decremenTimePerMove(value)),
-        incremenFailCounter: (value) => dispatch(action.incremenFailCounter(value)),
-        setPositionGameObj: (pos, value) => dispatch(action.setPositionGameObj(pos, value))
+        incremenFailCounter: (value) => dispatch(action.incremenFailCounter(value))
 
     };
 

@@ -6,14 +6,14 @@ const InfoGame = (props) => {
 
     const {
         score, failed,
-        macsScore, maxLifeCount, sizeInfo
+        maxScore, maxLifeCount, sizeInfo
     } = props;
 
     return (
 
         <ul className='game-conteiner__info' style={{ width: `${sizeInfo}px` }}>
             <li><h1>Score:</h1></li>
-            <li>{score} / {macsScore}</li>
+            <li>{score} / {maxScore}</li>
             <li><h1>Life:</h1></li>
             <LifeBox failed={failed} maxLifeCount={maxLifeCount} />
         </ul>
@@ -26,7 +26,7 @@ const mapStateToProps = (state) => {
 
         score: state.score,
         failed: state.failed,
-        macsScore: state.macsScore,
+        maxScore: state.maxScore,
         maxLifeCount: state.maxLifeCount
 
     };

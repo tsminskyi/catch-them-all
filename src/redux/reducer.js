@@ -55,22 +55,16 @@ const reducer = (state, action) => {
 
         }
 
-        case actionType.SET_POSITION: {
-
-            const newfieldValue = JSON.parse(JSON.stringify(state.gameFilde));
-            newfieldValue[action.payload.pos] = action.payload.value;
-
-            return {
-
-                ...state, gameFilde: newfieldValue
-
-            };
-
-        }
-
         case actionType.RESET_GAMEBOARD: {
 
-            const index = Math.floor(Math.random() * state.gameFilde.length);
+            const currentIndexHole = state.gameFilde.indexOf(gameObj.hole);
+            let index = null;
+            while (true) {
+
+                index = Math.floor(Math.random() * state.gameFilde.length);
+                if (index !== currentIndexHole) break;
+
+            }
             const newfieldValue = new Array(9).fill(gameObj.hole);
             newfieldValue[index] = gameObj.mole;
             return {

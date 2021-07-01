@@ -11,7 +11,7 @@ const initialSate = {
     gameFilde: [0, 0, 0, 0, 0, 0, 0, 0, 0],
     startTime: null,
     timerID: null,
-    macsScore: 100,
+    maxScore: 100,
     maxLifeCount: 3
 
 };

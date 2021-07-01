@@ -45,15 +45,6 @@ export const incremenFailCounter = (value) => {
 
 };
 
-export const setPositionGameObj = (pos, value) => {
-
-    return {
-        type: actionType.SET_POSITION,
-        payload: { pos, value }
-    };
-
-};
-
 export const resetGameBoard = (value) => {
 
     return {
