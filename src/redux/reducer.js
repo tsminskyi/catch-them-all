@@ -57,12 +57,12 @@ const reducer = (state, action) => {
 
         case actionType.RESET_GAMEBOARD: {
 
-            const currentIndexHole = state.gameFilde.indexOf(gameObj.hole);
+            const currentIndexMole = state.gameFilde.indexOf(gameObj.mole);
             let index = null;
             while (true) {
 
                 index = Math.floor(Math.random() * state.gameFilde.length);
-                if (index !== currentIndexHole) break;
+                if (index !== currentIndexMole) break;
 
             }
             const newfieldValue = new Array(9).fill(gameObj.hole);
