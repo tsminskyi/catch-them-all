@@ -8,7 +8,7 @@ const initialSate = {
     timePerMove: 4,
     isGameOn: false,
     sizeBoard: 3,
-    gameFilde: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    gameField: [0, 0, 0, 0, 0, 0, 0, 0, 0],
     startTime: null,
     timerID: null,
     maxScore: 100,

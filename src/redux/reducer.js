@@ -1,5 +1,5 @@
 import * as actionType from './action-types';
-import * as defaulte from '../enum/defaulteValue';
+import * as def from '../enum/defaultValue';
 import gameObj from '../enum/gameObj';
 
 const reducer = (state, action) => {
@@ -55,21 +55,21 @@ const reducer = (state, action) => {
 
         }
 
-        case actionType.RESET_GAMEBOARD: {
+        case actionType.RESET_GAME_BOARD: {
 
-            const currentIndexMole = state.gameFilde.indexOf(gameObj.mole);
+            const currentIndexMole = state.gameField.indexOf(gameObj.mole);
             let index = null;
             while (true) {
 
-                index = Math.floor(Math.random() * state.gameFilde.length);
+                index = Math.floor(Math.random() * state.gameField.length);
                 if (index !== currentIndexMole) break;
 
             }
-            const newfieldValue = new Array(9).fill(gameObj.hole);
-            newfieldValue[index] = gameObj.mole;
+            const newFieldValue = new Array(9).fill(gameObj.hole);
+            newFieldValue[index] = gameObj.mole;
             return {
 
-                ...state, gameFilde: newfieldValue
+                ...state, gameField: newFieldValue
 
             };
 
@@ -110,9 +110,9 @@ const reducer = (state, action) => {
             return {
 
                 ...state,
-                score: defaulte.minScore,
-                failed: defaulte.minLife,
-                timePerMove: defaulte.timePerMove
+                score: def.minScore,
+                failed: def.minLife,
+                timePerMove: def.timePerMove
 
             };
 

@@ -9,8 +9,8 @@ import * as action from '../redux/action';
 const GameBoard = (props) => {
 
     const {
-        score, gameFilde, incrementScore, resetGameBoard, maxLifeCount, failed, maxScore,
-        incremenFailCounter, setStartTime, decremenTimePerMove, sizeBourdCell, widthBourd
+        score, gameField, incrementScore, resetGameBoard, maxLifeCount, failed, maxScore,
+        incrementFailCounter, setStartTime, decrementTimePerMove, sizeBoardCell, widthBoard
     } = props;
 
     const eventClick = (e) => {
@@ -20,7 +20,7 @@ const GameBoard = (props) => {
         if (isLifeCountEnd && isMaxScore) {
 
             const elem = e.target.parentNode;
-            const value = gameFilde[elem.id];
+            const value = gameField[elem.id];
             if (value === gameObj.mole) {
 
                 incrementScore(10);
@@ -32,12 +32,12 @@ const GameBoard = (props) => {
                     e.target.classList.remove('pass');
 
                 }, 40);
-                if (score % 30 === 0) decremenTimePerMove(1);
+                if (score % 30 === 0) decrementTimePerMove(1);
 
             }
             if (value === gameObj.hole) {
 
-                incremenFailCounter(1);
+                incrementFailCounter(1);
                 e.target.classList.add('fail');
                 setTimeout(() => e.target.classList.remove('fail'), 40);
 
@@ -49,17 +49,17 @@ const GameBoard = (props) => {
 
     return (
 
-        <ul className='game-conteiner__bourd'
-            style={{ width: `${widthBourd}px` }}
+        <ul className='game-container__board'
+            style={{ width: `${widthBoard}px` }}
             onClick={(e) => eventClick(e)}
             role='presentation'>
             {
-                gameFilde.map((elem, i) => {
+                gameField.map((elem, i) => {
 
                     const img = elem === gameObj.mole ? mole : hole;
                     const key = `id${i}`;
                     return (
-                        <CellGame img={img} sizeBourdCell={sizeBourdCell}
+                        <CellGame img={img} sizeBoardCell={sizeBoardCell}
                             id={i} key={key} />
                     );
 
@@ -77,7 +77,7 @@ const mapStateToProps = (state) => {
 
         score: state.score,
         failed: state.failed,
-        gameFilde: state.gameFilde,
+        gameField: state.gameField,
         maxScore: state.maxScore,
         maxLifeCount: state.maxLifeCount
 
@@ -92,8 +92,8 @@ const mapDispatchToProps = (dispatch) => {
         resetGameBoard: () => dispatch(action.resetGameBoard()),
         setStartTime: (value) => dispatch(action.setStartTime(value)),
         incrementScore: (value) => dispatch(action.incrementScore(value)),
-        decremenTimePerMove: (value) => dispatch(action.decremenTimePerMove(value)),
-        incremenFailCounter: (value) => dispatch(action.incremenFailCounter(value))
+        decrementTimePerMove: (value) => dispatch(action.decrementTimePerMove(value)),
+        incrementFailCounter: (value) => dispatch(action.incrementFailCounter(value))
 
     };
 

@@ -7,13 +7,13 @@
     }
 }
 
-.game-conteiner {
+.game-container {
     position: relative;
     display: flex;
     margin: auto;
     height: auto;
 
-    &__bourd {
+    &__board {
         display: flex;
         flex-wrap: wrap;
         background-color: red;

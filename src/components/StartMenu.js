@@ -11,7 +11,7 @@ const StartMenu = (props) => {
 
     const getClassName = () => {
 
-        const baseClass = 'game-conteiner__menu';
+        const baseClass = 'game-container__menu';
         if (!isGameOn) return baseClass;
         return `${baseClass} hidden`;
 

@@ -10,12 +10,21 @@ const App = (props) => {
 
   const {
     score, failed, timePerMove, resetGameBoard, setStartTime, startTime, setTimerID, timerID, sizeBoard,
-    maxScore, maxLifeCount, isGameOn, setGameStatus, incremenFailCounter
+    maxScore, maxLifeCount, isGameOn, setGameStatus, incrementFailCounter
   } = props;
-  const sizeConteiner = window.innerWidth > window.innerHeight ? window.innerHeight * 0.9 : window.innerWidth * 0.9;
-  const sizeInfo = sizeConteiner * 0.2;
-  const widthBourd = sizeConteiner * 0.8;
-  const sizeBourdCell = widthBourd / sizeBoard;
+
+  let sizeContainer = window.innerWidth > window.innerHeight ? window.innerHeight * 0.9 : window.innerWidth * 0.9;
+  let sizeInfo = sizeContainer * 0.2;
+  let widthBoard = sizeContainer * 0.8;
+  let sizeBoardCell = widthBoard / sizeBoard;
+  window.addEventListener('resize', () => {
+
+    sizeContainer = window.innerWidth > window.innerHeight ? window.innerHeight * 0.9 : window.innerWidth * 0.9;
+    sizeInfo = sizeContainer * 0.2;
+    widthBoard = sizeContainer * 0.8;
+    sizeBoardCell = widthBoard / sizeBoard;
+
+  });
 
   if (maxLifeCount <= failed || maxScore <= score) setGameStatus(false);
 
@@ -33,7 +42,7 @@ const App = (props) => {
           setStartTime();
           setTimeout(40);
           resetGameBoard();
-          incremenFailCounter(1);
+          incrementFailCounter(1);
 
         }
 
@@ -46,9 +55,9 @@ const App = (props) => {
   }, [startTime, isGameOn]);
 
   return (
-    <div className='game-conteiner' style={{ width: `${sizeConteiner}px` }}>
+    <div className='game-container' style={{ width: `${sizeContainer}px` }}>
       <StartMenu />
-      <GameBoard sizeBourdCell={sizeBourdCell} widthBourd={widthBourd} />
+      <GameBoard sizeBoardCell={sizeBoardCell} widthBoard={widthBoard} />
       <InfoGame sizeInfo={sizeInfo} />
     </div>
   );
@@ -81,7 +90,7 @@ const mapDispatchToProps = (dispatch) => {
     setTimerID: (value) => dispatch(action.setTimerID(value)),
     setStartTime: () => dispatch(action.setStartTime()),
     setGameStatus: (value) => dispatch(action.setGameStatus(value)),
-    incremenFailCounter: (value) => dispatch(action.incremenFailCounter(value))
+    incrementFailCounter: (value) => dispatch(action.incrementFailCounter(value))
 
   };
 

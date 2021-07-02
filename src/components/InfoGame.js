@@ -11,7 +11,7 @@ const InfoGame = (props) => {
 
     return (
 
-        <ul className='game-conteiner__info' style={{ width: `${sizeInfo}px` }}>
+        <ul className='game-container__info' style={{ width: `${sizeInfo}px` }}>
             <li><h1>Score:</h1></li>
             <li>{score} / {maxScore}</li>
             <li><h1>Life:</h1></li>

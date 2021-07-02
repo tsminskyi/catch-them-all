@@ -27,7 +27,7 @@ export const incrementTimePerMove = (value) => {
 
 };
 
-export const decremenTimePerMove = (value) => {
+export const decrementTimePerMove = (value) => {
 
     return {
         type: actionType.DECREMENT_TIME_PER_MOVE,
@@ -36,7 +36,7 @@ export const decremenTimePerMove = (value) => {
 
 };
 
-export const incremenFailCounter = (value) => {
+export const incrementFailCounter = (value) => {
 
     return {
         type: actionType.FAIL_COUNTER,
@@ -48,7 +48,7 @@ export const incremenFailCounter = (value) => {
 export const resetGameBoard = (value) => {
 
     return {
-        type: actionType.RESET_GAMEBOARD,
+        type: actionType.RESET_GAME_BOARD,
         payload: value
     };
 
