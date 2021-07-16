@@ -1,13 +1,19 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as action from '../redux/action';
+import { isMaxLifeCountSelector, isMaxScoreSelector } from '../selectors/index';
 
-const StartMenu = (props) => {
+const StartMenu = () => {
 
-    const {
-        isGameOn, setGameStatus, resetGameBoard, setStartTime, resetGameValue,
-        score, maxScore, failed, maxLifeCount
-    } = props;
+    const isGameOn = useSelector((state) => state.isGameOn);
+    const isMaxLifeCount = useSelector(isMaxLifeCountSelector);
+    const isMaxScoreCount = useSelector(isMaxScoreSelector);
+
+    const dispatch = useDispatch();
+    const setGameStatus = (value) => dispatch(action.setGameStatus(value));
+    const resetGameBoard = () => dispatch(action.resetGameBoard());
+    const setStartTime = () => dispatch(action.setStartTime());
+    const resetGameValue = () => dispatch(action.resetGameValue());
 
     const getClassName = () => {
 
@@ -18,8 +24,8 @@ const StartMenu = (props) => {
     };
     const resultText = () => {
 
-        if (score >= maxScore) return 'Game over, you WIN!';
-        if (failed >= maxLifeCount) return 'Game over, you LOST!';
+        if (isMaxScoreCount) return 'Game over, you WIN!';
+        if (isMaxLifeCount) return 'Game over, you LOST!';
         return '';
 
     };
@@ -41,29 +47,4 @@ const StartMenu = (props) => {
 
 };
 
-const mapStateToProps = (state) => {
-
-    return {
-
-        isGameOn: state.isGameOn,
-        failed: state.failed,
-        maxLifeCount: state.maxLifeCount,
-        maxScore: state.maxScore,
-        score: state.score
-
-    };
-
-};
-const mapDispatchToProps = (dispatch) => {
-
-    return {
-
-        setGameStatus: (value) => dispatch(action.setGameStatus(value)),
-        resetGameBoard: () => dispatch(action.resetGameBoard()),
-        setStartTime: () => dispatch(action.setStartTime()),
-        resetGameValue: () => dispatch(action.resetGameValue())
-    };
-
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(StartMenu);
+export default StartMenu;

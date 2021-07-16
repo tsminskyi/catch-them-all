@@ -1,13 +1,15 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import LifeBox from './LifeBox';
 
 const InfoGame = (props) => {
 
-    const {
-        score, failed,
-        maxScore, maxLifeCount, sizeInfo
-    } = props;
+    const { sizeInfo } = props;
+
+    const score = useSelector((state) => state.score);
+    const failed = useSelector((state) => state.failed);
+    const maxScore = useSelector((state) => state.maxScore);
+    const maxLifeCount = useSelector((state) => state.maxLifeCount);
 
     return (
 
@@ -20,16 +22,5 @@ const InfoGame = (props) => {
     );
 
 };
-const mapStateToProps = (state) => {
 
-    return {
-
-        score: state.score,
-        failed: state.failed,
-        maxScore: state.maxScore,
-        maxLifeCount: state.maxLifeCount
-
-    };
-
-};
-export default connect(mapStateToProps)(InfoGame);
+export default InfoGame;

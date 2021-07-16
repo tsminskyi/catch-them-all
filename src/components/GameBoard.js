@@ -1,23 +1,30 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import hole from '../img/hole.png';
 import mole from '../img/mole.png';
 import CellGame from './CellGame';
 import gameObj from '../enum/gameObj';
 import * as action from '../redux/action';
+import { isGameEndSelector } from '../selectors/index';
 
 const GameBoard = (props) => {
 
-    const {
-        score, gameField, incrementScore, resetGameBoard, maxLifeCount, failed, maxScore,
-        incrementFailCounter, setStartTime, decrementTimePerMove, sizeBoardCell, widthBoard
-    } = props;
+    const { sizeBoardCell, widthBoard } = props;
+
+    const score = useSelector((state) => state.score);
+    const gameField = useSelector((state) => state.gameField);
+    const isGameEnd = useSelector(isGameEndSelector);
+
+    const dispatch = useDispatch();
+    const resetGameBoard = () => dispatch(action.resetGameBoard());
+    const setStartTime = (value) => dispatch(action.setStartTime(value));
+    const incrementScore = (value) => dispatch(action.incrementScore(value));
+    const decrementTimePerMove = (value) => dispatch(action.decrementTimePerMove(value));
+    const incrementFailCounter = (value) => dispatch(action.incrementFailCounter(value));
 
     const eventClick = (e) => {
 
-        const isLifeCountEnd = maxLifeCount > failed;
-        const isMaxScore = maxScore > score;
-        if (isLifeCountEnd && isMaxScore) {
+        if (!isGameEnd) {
 
             const elem = e.target.parentNode;
             const value = gameField[elem.id];
@@ -71,31 +78,4 @@ const GameBoard = (props) => {
 
 };
 
-const mapStateToProps = (state) => {
-
-    return {
-
-        score: state.score,
-        failed: state.failed,
-        gameField: state.gameField,
-        maxScore: state.maxScore,
-        maxLifeCount: state.maxLifeCount
-
-    };
-
-};
-
-const mapDispatchToProps = (dispatch) => {
-
-    return {
-
-        resetGameBoard: () => dispatch(action.resetGameBoard()),
-        setStartTime: (value) => dispatch(action.setStartTime(value)),
-        incrementScore: (value) => dispatch(action.incrementScore(value)),
-        decrementTimePerMove: (value) => dispatch(action.decrementTimePerMove(value)),
-        incrementFailCounter: (value) => dispatch(action.incrementFailCounter(value))
-
-    };
-
-};
-export default connect(mapStateToProps, mapDispatchToProps)(GameBoard);
+export default GameBoard;
