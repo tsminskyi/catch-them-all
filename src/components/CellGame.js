@@ -5,7 +5,6 @@ const CellGame = (props) => {
     const { sizeBoardCell, img, id } = props;
     return (
         <li className='game-container__cell'
-            key={id.toString()}
             id={id}
             style={{ width: `${sizeBoardCell}px`, height: `${sizeBoardCell}px` }}>
             <img src={img} alt='' />

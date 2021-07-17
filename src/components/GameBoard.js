@@ -64,10 +64,9 @@ const GameBoard = (props) => {
                 gameField.map((elem, i) => {
 
                     const img = elem === gameObj.mole ? mole : hole;
-                    const key = `id${i}`;
                     return (
                         <CellGame img={img} sizeBoardCell={sizeBoardCell}
-                            id={i} key={key} />
+                            id={i} key={i.toString()} />
                     );
 
                 })
