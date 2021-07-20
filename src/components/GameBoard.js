@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import hole from '../img/hole.png';
 import mole from '../img/mole.png';
@@ -10,6 +10,7 @@ import { isGameEndSelector } from '../selectors/index';
 const GameBoard = (props) => {
 
     const { sizeBoardCell, widthBoard } = props;
+    const [active, setActive] = useState(null);
 
     const score = useSelector((state) => state.score);
     const gameField = useSelector((state) => state.gameField);
@@ -28,15 +29,16 @@ const GameBoard = (props) => {
 
             const elem = e.target.parentNode;
             const value = gameField[elem.id];
+            setActive(elem.id);
             if (value === gameObj.mole) {
 
                 incrementScore(10);
-                e.target.classList.add('pass');
+                // e.target.classList.add('pass');
                 setTimeout(() => {
 
                     resetGameBoard();
                     setStartTime();
-                    e.target.classList.remove('pass');
+                    // e.target.classList.remove('pass');
 
                 }, 40);
                 if (score % 30 === 0) decrementTimePerMove(1);
@@ -45,8 +47,8 @@ const GameBoard = (props) => {
             if (value === gameObj.hole) {
 
                 incrementFailCounter(1);
-                e.target.classList.add('fail');
-                setTimeout(() => e.target.classList.remove('fail'), 40);
+                // e.target.classList.add('fail');
+                // setTimeout(() => e.target.classList.remove('fail'), 40);
 
             }
 
@@ -65,8 +67,11 @@ const GameBoard = (props) => {
 
                     const img = elem === gameObj.mole ? mole : hole;
                     return (
+
                         <CellGame img={img} sizeBoardCell={sizeBoardCell}
-                            id={i} key={i.toString()} />
+                            id={i}
+                            key={i.toString()}
+                            isActive={{ elem: active === i, status: elem === gameObj.mole }} />
                     );
 
                 })
