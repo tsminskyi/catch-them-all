@@ -10,7 +10,6 @@ const CellGame = (props) => {
 
     useEffect(() => {
 
-        console.log('sdf');
         if (isActive.elem) {
 
             if (isActive.status) setClassName(`${baseClass} pass`);
