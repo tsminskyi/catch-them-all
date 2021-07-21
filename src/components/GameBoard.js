@@ -23,22 +23,20 @@ const GameBoard = (props) => {
     const decrementTimePerMove = (value) => dispatch(action.decrementTimePerMove(value));
     const incrementFailCounter = (value) => dispatch(action.incrementFailCounter(value));
 
-    const eventClick = (e) => {
+    const eventClick = (i) => {
 
         if (!isGameEnd) {
 
-            const elem = e.target.parentNode;
-            const value = gameField[elem.id];
-            setActive(elem.id);
+            const value = gameField[i];
+            setActive(i);
+            setTimeout(() => setActive(null), 40);
             if (value === gameObj.mole) {
 
                 incrementScore(10);
-                // e.target.classList.add('pass');
                 setTimeout(() => {
 
                     resetGameBoard();
                     setStartTime();
-                    // e.target.classList.remove('pass');
 
                 }, 40);
                 if (score % 30 === 0) decrementTimePerMove(1);
@@ -47,8 +45,6 @@ const GameBoard = (props) => {
             if (value === gameObj.hole) {
 
                 incrementFailCounter(1);
-                // e.target.classList.add('fail');
-                // setTimeout(() => e.target.classList.remove('fail'), 40);
 
             }
 
@@ -59,9 +55,7 @@ const GameBoard = (props) => {
     return (
 
         <ul className='game-container__board'
-            style={{ width: `${widthBoard}px` }}
-            onClick={(e) => eventClick(e)}
-            role='presentation'>
+            style={{ width: `${widthBoard}px` }}>
             {
                 gameField.map((elem, i) => {
 
@@ -69,9 +63,10 @@ const GameBoard = (props) => {
                     return (
 
                         <CellGame img={img} sizeBoardCell={sizeBoardCell}
-                            id={i}
                             key={i.toString()}
-                            isActive={{ elem: active === i, status: elem === gameObj.mole }} />
+                            isActive={active === i}
+                            isCorrectClick={gameField[i] === gameObj.mole}
+                            onClick={() => eventClick(i)} />
                     );
 
                 })

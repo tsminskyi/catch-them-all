@@ -1,30 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 const CellGame = (props) => {
 
     const {
-        sizeBoardCell, img, id, isActive
+        sizeBoardCell, img, isActive, isCorrectClick, onClick
     } = props;
-    const baseClass = 'game-container__cell';
-    const [className, setClassName] = useState(baseClass);
 
-    useEffect(() => {
+    const className = () => {
 
-        if (isActive.elem) {
+        const baseClass = 'game-container__cell';
+        if (isActive) {
 
-            if (isActive.status) setClassName(`${baseClass} pass`);
-            setClassName(`${baseClass} fail`);
+            if (isCorrectClick) return `${baseClass} pass`;
+            return `${baseClass} fail`;
 
         }
+        return baseClass;
 
-        setClassName(baseClass);
-
-    });
+    };
 
     return (
-        <li className={className}
-            id={id}
-            style={{ width: `${sizeBoardCell}px`, height: `${sizeBoardCell}px` }}>
+        <li className={className()}
+            role='presentation'
+            style={{ width: `${sizeBoardCell}px`, height: `${sizeBoardCell}px` }}
+            onClick={onClick}>
             <img src={img} alt='' />
         </li>
     );
