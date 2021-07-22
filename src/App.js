@@ -14,6 +14,7 @@ const App = () => {
   const startTime = useSelector((state) => state.startTime);
   const timerID = useSelector((state) => state.timerID);
   const isGameOn = useSelector((state) => state.isGameOn);
+  const sizeBoard = useSelector((state) => state.sizeBoard);
 
   const dispatch = useDispatch();
   const incrementFailCounter = (value) => dispatch(action.incrementFailCounter(value));
@@ -23,18 +24,24 @@ const App = () => {
   const setGameStatus = (value) => dispatch(action.setGameStatus(value));
 
   const [sizeContainer, setSizeContainer] = useState(
-    window.innerWidth > window.innerHeight ? window.innerHeight * 0.9 : window.innerWidth * 0.9
+    window.innerWidth >= window.innerHeight ? window.innerHeight * 0.9 : window.innerWidth * 0.9
   );
 
   const sizeInfo = sizeContainer * 0.2;
   const widthBoard = sizeContainer * 0.8;
-  const sizeBoardCell = widthBoard / 3;
+  const sizeBoardCell = widthBoard / sizeBoard;
 
   useEffect(() => {
 
     window.addEventListener('resize', () => {
 
-      setSizeContainer(window.innerWidth > window.innerHeight ? window.innerHeight * 0.9 : window.innerWidth * 0.9);
+      setSizeContainer(window.innerWidth >= window.innerHeight ? window.innerHeight * 0.9 : window.innerWidth * 0.9);
+
+    });
+
+    return window.addEventListener('resize', () => {
+
+      setSizeContainer(window.innerWidth >= window.innerHeight ? window.innerHeight * 0.9 : window.innerWidth * 0.9);
 
     });
 
