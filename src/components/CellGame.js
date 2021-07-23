@@ -22,7 +22,7 @@ const CellGame = (props) => {
     return (
         <li className={className()}
             role='presentation'
-            style={{ width: `${Math.floor(sizeBoardCell * 100 / 100)}px`, height: `${sizeBoardCell}px` }}
+            style={{ width: `${Math.floor(sizeBoardCell * 100 / 100)}px`, height: `${Math.floor(sizeBoardCell * 100 / 100)}px` }}
             onClick={onClick}>
             <img src={img} alt='' />
         </li>
