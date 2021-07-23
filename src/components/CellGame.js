@@ -6,6 +6,7 @@ const CellGame = (props) => {
         sizeBoardCell, img, isActive, isCorrectClick, onClick
     } = props;
 
+    const getSize = () => Math.floor((sizeBoardCell * 100) / 100);
     const className = () => {
 
         const baseClass = 'game-container__cell';
@@ -22,7 +23,7 @@ const CellGame = (props) => {
     return (
         <li className={className()}
             role='presentation'
-            style={{ width: `${Math.floor(sizeBoardCell * 100 / 100)}px`, height: `${Math.floor(sizeBoardCell * 100 / 100)}px` }}
+            style={{ width: `${getSize()}px`, height: `${getSize()}px` }}
             onClick={onClick}>
             <img src={img} alt='' />
         </li>
