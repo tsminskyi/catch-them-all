@@ -39,7 +39,7 @@ const App = () => {
 
     });
 
-    return window.addEventListener('resize', () => {
+    return window.removeEventListener('resize', () => {
 
       setSizeContainer(window.innerWidth >= window.innerHeight ? window.innerHeight * 0.9 : window.innerWidth * 0.9);
 
