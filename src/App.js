@@ -47,7 +47,11 @@ const App = () => {
 
   }, []);
 
-  if (isGameEnd) setGameStatus(false);
+  useEffect(() => {
+
+    if (isGameEnd) setGameStatus(false);
+
+  });
 
   useEffect(() => {
 

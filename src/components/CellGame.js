@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 
 const CellGame = (props) => {
 
@@ -7,21 +8,15 @@ const CellGame = (props) => {
     } = props;
 
     const getSize = () => Math.floor((sizeBoardCell * 100) / 100);
-    const className = () => {
 
-        const baseClass = 'game-container__cell';
-        if (isActive) {
-
-            if (isCorrectClick) return `${baseClass} pass`;
-            return `${baseClass} fail`;
-
-        }
-        return baseClass;
-
-    };
+    const classNameCell = classNames(
+        'game-container__cell',
+        { pass: isCorrectClick && isActive },
+        { fail: !isCorrectClick && isActive }
+    );
 
     return (
-        <li className={className()}
+        <li className={classNameCell}
             role='presentation'
             style={{ width: `${getSize()}px`, height: `${getSize()}px` }}
             onClick={onClick}>

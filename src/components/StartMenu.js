@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import * as action from '../redux/action';
 import { isMaxLifeCountSelector, isMaxScoreSelector } from '../selectors/index';
@@ -15,13 +16,7 @@ const StartMenu = () => {
     const setStartTime = () => dispatch(action.setStartTime());
     const resetGameValue = () => dispatch(action.resetGameValue());
 
-    const getClassName = () => {
-
-        const baseClass = 'game-container__menu';
-        if (!isGameOn) return baseClass;
-        return `${baseClass} hidden`;
-
-    };
+    const className = classNames('game-container__menu', { hidden: isGameOn });
     const resultText = () => {
 
         if (isMaxScoreCount) return 'Game over, you WIN!';
@@ -29,9 +24,10 @@ const StartMenu = () => {
         return '';
 
     };
+
     return (
 
-        <div className={getClassName()}>
+        <div className={className}>
             <h3>{resultText()}</h3>
             <button type='button' onClick={() => {
 
