@@ -11,6 +11,9 @@ const GameBoard = (props) => {
 
     const { sizeBoardCell, widthBoard } = props;
     const [active, setActive] = useState(null);
+    const [timersID, setTimersID] = useState(null);
+    const tempTimersID = [];
+
     const score = useSelector((state) => state.score);
     const gameField = useSelector((state) => state.gameField);
     const isGameEnd = useSelector(isGameEndSelector);
@@ -28,22 +31,16 @@ const GameBoard = (props) => {
 
             const value = gameField[i];
             setActive(i);
-            const id = setTimeout(() => {
-
-                setActive(null);
-                clearTimeout(id);
-
-            }, 40);
+            tempTimersID.push(setTimeout(() => setActive(null), 40));
             if (value === gameObj.mole) {
 
                 incrementScore(10);
-                const idTimeResetGameBoard = setTimeout(() => {
+                tempTimersID.push(setTimeout(() => {
 
                     resetGameBoard();
                     setStartTime();
-                    clearTimeout(idTimeResetGameBoard);
 
-                }, 40);
+                }, 40));
                 if (score % 30 === 0) decrementTimePerMove(1);
 
             }
@@ -52,6 +49,15 @@ const GameBoard = (props) => {
                 incrementFailCounter(1);
 
             }
+            setTimersID(tempTimersID);
+
+        } else if (timersID != null) {
+
+            timersID.forEach((element) => {
+
+                clearTimeout(element);
+
+            });
 
         }
 

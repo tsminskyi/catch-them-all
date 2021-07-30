@@ -11,7 +11,7 @@ const StartMenu = () => {
     const isMaxScoreCount = useSelector(isMaxScoreSelector);
 
     const dispatch = useDispatch();
-    const setGameStatus = (value) => dispatch(action.setGameStatus(value));
+    const setGameOnOff = (value) => dispatch(action.setGameOnOff(value));
     const resetGameBoard = () => dispatch(action.resetGameBoard());
     const setStartTime = () => dispatch(action.setStartTime());
     const resetGameValue = () => dispatch(action.resetGameValue());
@@ -31,7 +31,7 @@ const StartMenu = () => {
             <h3>{resultText()}</h3>
             <button type='button' onClick={() => {
 
-                setGameStatus(true);
+                setGameOnOff(true);
                 resetGameBoard();
                 setStartTime();
                 resetGameValue();

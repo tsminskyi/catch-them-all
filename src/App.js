@@ -21,7 +21,7 @@ const App = () => {
   const resetGameBoard = () => dispatch(action.resetGameBoard());
   const setTimerID = (value) => dispatch(action.setTimerID(value));
   const setStartTime = () => dispatch(action.setStartTime());
-  const setGameStatus = (value) => dispatch(action.setGameStatus(value));
+  const setGameOnOff = (value) => dispatch(action.setGameOnOff(value));
 
   const [sizeContainer, setSizeContainer] = useState(
     window.innerWidth >= window.innerHeight ? window.innerHeight * 0.9 : window.innerWidth * 0.9
@@ -49,7 +49,7 @@ const App = () => {
 
   useEffect(() => {
 
-    if (isGameEnd) setGameStatus(false);
+    if (isGameEnd) setGameOnOff(false);
 
   });
 

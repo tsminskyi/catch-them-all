@@ -54,7 +54,7 @@ export const resetGameBoard = (value) => {
 
 };
 
-export const setGameStatus = (value) => {
+export const setGameOnOff = (value) => {
 
     return {
         type: actionType.IS_GAME_ON,
