@@ -10,9 +10,7 @@ import { isGameEndSelector } from '../selectors/index';
 const GameBoard = (props) => {
 
     const { sizeBoardCell, widthBoard } = props;
-    const [active, setActive] = useState(null);
     const [timersID, setTimersID] = useState(null);
-    const tempTimersID = [];
 
     const score = useSelector((state) => state.score);
     const gameField = useSelector((state) => state.gameField);
@@ -30,12 +28,10 @@ const GameBoard = (props) => {
         if (!isGameEnd) {
 
             const value = gameField[i];
-            setActive(i);
-            tempTimersID.push(setTimeout(() => setActive(null), 40));
             if (value === gameObj.mole) {
 
                 incrementScore(10);
-                tempTimersID.push(setTimeout(() => {
+                setTimersID(setTimeout(() => {
 
                     resetGameBoard();
                     setStartTime();
@@ -49,15 +45,10 @@ const GameBoard = (props) => {
                 incrementFailCounter(1);
 
             }
-            setTimersID(tempTimersID);
 
         } else if (timersID != null) {
 
-            timersID.forEach((element) => {
-
-                clearTimeout(element);
-
-            });
+            clearTimeout(timersID);
 
         }
 
@@ -75,7 +66,6 @@ const GameBoard = (props) => {
 
                         <CellGame img={img} sizeBoardCell={sizeBoardCell}
                             key={i.toString()}
-                            isActive={active === i}
                             isCorrectClick={gameField[i] === gameObj.mole}
                             onClick={() => eventClick(i)} />
                     );
