@@ -5,24 +5,17 @@ import LifeBox from './LifeBox';
 const InfoGame = (props) => {
 
     const { sizeInfo } = props;
-    const data = useSelector((state) => {
-
-        return {
-            score: state.score,
-            maxScore: state.maxScore,
-            failed: state.failed,
-            maxLifeCount: state.maxLifeCount
-        };
-
-    });
+    const {
+        score, maxScore, failed, maxLifeCount
+    } = useSelector((state) => state);
 
     return (
 
         <ul className='game-container__info' style={{ width: `${sizeInfo}px` }}>
             <li><h1>Score:</h1></li>
-            <li>{data.score} / {data.maxScore}</li>
+            <li>{score} / {maxScore}</li>
             <li><h1>Life:</h1></li>
-            <LifeBox failed={data.failed} maxLifeCount={data.maxLifeCount} />
+            <LifeBox failed={failed} maxLifeCount={maxLifeCount} />
         </ul>
     );
 
