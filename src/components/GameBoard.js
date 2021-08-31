@@ -12,8 +12,14 @@ const GameBoard = (props) => {
     const { sizeBoardCell, widthBoard } = props;
     const [timersID, setTimersID] = useState(null);
 
-    const score = useSelector((state) => state.score);
-    const gameField = useSelector((state) => state.gameField);
+    const data = useSelector((state) => {
+
+        return {
+            score: state.score,
+            gameField: state.gameField
+        };
+
+    });
     const isGameEnd = useSelector(isGameEndSelector);
 
     const dispatch = useDispatch();
@@ -27,7 +33,7 @@ const GameBoard = (props) => {
 
         if (!isGameEnd) {
 
-            const value = gameField[i];
+            const value = data.gameField[i];
             if (value === gameObj.mole) {
 
                 incrementScore(10);
@@ -37,7 +43,7 @@ const GameBoard = (props) => {
                     setStartTime();
 
                 }, 40));
-                if (score % 30 === 0) decrementTimePerMove(1);
+                if (data.score % 30 === 0) decrementTimePerMove(1);
 
             }
             if (value === gameObj.hole) {
@@ -59,14 +65,14 @@ const GameBoard = (props) => {
         <ul className='game-container__board'
             style={{ width: `${widthBoard}px` }}>
             {
-                gameField.map((elem, i) => {
+                data.gameField.map((elem, i) => {
 
                     const img = elem === gameObj.mole ? mole : hole;
                     return (
 
                         <CellGame img={img} sizeBoardCell={sizeBoardCell}
                             key={i.toString()}
-                            isCorrectClick={gameField[i] === gameObj.mole}
+                            isCorrectClick={data.gameField[i] === gameObj.mole}
                             onClick={() => eventClick(i)} />
                     );
 
