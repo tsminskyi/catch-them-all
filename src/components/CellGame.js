@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import classNames from 'classnames';
 
 const CellGame = (props) => {
@@ -6,7 +6,7 @@ const CellGame = (props) => {
     const [active, setActive] = useState(null);
 
     const {
-        sizeBoardCell, img, isCorrectClick, onClick
+        sizeBoardCell, img, isCorrectClick, eventClick
     } = props;
 
     const getSize = () => Math.floor((sizeBoardCell * 100) / 100);
@@ -17,12 +17,12 @@ const CellGame = (props) => {
         { fail: !isCorrectClick && active }
     );
 
-    const clickHandle = () => {
+    const clickHandle = useCallback(() => {
 
         setActive(true);
-        onClick();
+        eventClick();
 
-    };
+    }, [setActive, eventClick]);
 
     useEffect(() => {
 

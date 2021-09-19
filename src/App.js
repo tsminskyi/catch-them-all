@@ -10,18 +10,11 @@ import { isGameEndSelector } from './selectors/index';
 const App = () => {
 
   const isGameEnd = useSelector(isGameEndSelector);
-  const timePerMove = useSelector((state) => state.timePerMove);
-  const startTime = useSelector((state) => state.startTime);
-  const timerID = useSelector((state) => state.timerID);
-  const isGameOn = useSelector((state) => state.isGameOn);
-  const sizeBoard = useSelector((state) => state.sizeBoard);
+  const {
+    timePerMove, startTime, timerID, isGameOn, sizeBoard
+  } = useSelector((state) => state);
 
   const dispatch = useDispatch();
-  const incrementFailCounter = (value) => dispatch(action.incrementFailCounter(value));
-  const resetGameBoard = () => dispatch(action.resetGameBoard());
-  const setTimerID = (value) => dispatch(action.setTimerID(value));
-  const setStartTime = () => dispatch(action.setStartTime());
-  const setGameOnOff = (value) => dispatch(action.setGameOnOff(value));
 
   const [sizeContainer, setSizeContainer] = useState(
     window.innerWidth >= window.innerHeight ? window.innerHeight * 0.9 : window.innerWidth * 0.9
@@ -49,9 +42,9 @@ const App = () => {
 
   useEffect(() => {
 
-    if (isGameEnd) setGameOnOff(false);
+    if (isGameEnd) dispatch(action.setGameOnOff(false));
 
-  });
+  }, [isGameEnd]);
 
   useEffect(() => {
 
@@ -64,16 +57,15 @@ const App = () => {
         const timePassed = new Date().getTime() - startTime;
         if (new Date(timePassed).getSeconds() === timePerMove) {
 
-          setStartTime();
-          setTimeout(40);
-          resetGameBoard();
-          incrementFailCounter(1);
+          dispatch(action.setStartTime());
+          dispatch(action.resetGameBoard());
+          dispatch(action.incrementFailCounter(1));
 
         }
 
       });
 
-      setTimerID(id);
+      dispatch(action.setTimerID(id));
 
     }
 

@@ -1,42 +1,39 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import * as action from '../redux/action';
-import { isMaxLifeCountSelector, isMaxScoreSelector } from '../selectors/index';
+import ResultText from './ResultText';
 
 const StartMenu = () => {
 
-    const isGameOn = useSelector((state) => state.isGameOn);
-    const isMaxLifeCount = useSelector(isMaxLifeCountSelector);
-    const isMaxScoreCount = useSelector(isMaxScoreSelector);
-
+    const { isGameOn, isMaxScoreCount, isMaxLifeCount } = useSelector((state) => state);
     const dispatch = useDispatch();
-    const setGameOnOff = (value) => dispatch(action.setGameOnOff(value));
-    const resetGameBoard = () => dispatch(action.resetGameBoard());
-    const setStartTime = () => dispatch(action.setStartTime());
-    const resetGameValue = () => dispatch(action.resetGameValue());
 
     const className = classNames('game-container__menu', { hidden: isGameOn });
-    const resultText = () => {
 
-        if (isMaxScoreCount) return 'Game over, you WIN!';
-        if (isMaxLifeCount) return 'Game over, you LOST!';
-        return '';
+    const click = useCallback(() => {
 
-    };
+        dispatch(action.setGameOnOff(true));
+        dispatch(action.resetGameBoard());
+        dispatch(action.setStartTime());
+        dispatch(action.resetGameValue());
 
+    }, [action.setGameOnOff,
+    action.resetGameBoard,
+    action.setStartTime,
+    action.resetGameValue]);
+
+    const isActive = useCallback(() => {
+
+        if (isMaxScoreCount || isMaxLifeCount) return true;
+        return false;
+
+    });
     return (
 
         <div className={className}>
-            <h3>{resultText()}</h3>
-            <button type='button' onClick={() => {
-
-                setGameOnOff(true);
-                resetGameBoard();
-                setStartTime();
-                resetGameValue();
-
-            }}>Start
+            <ResultText isActive={isActive} />
+            <button type='button' onClick={click}>Start
             </button>
         </div>
     );

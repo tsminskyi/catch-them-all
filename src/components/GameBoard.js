@@ -16,11 +16,6 @@ const GameBoard = (props) => {
     const isGameEnd = useSelector(isGameEndSelector);
 
     const dispatch = useDispatch();
-    const resetGameBoard = () => dispatch(action.resetGameBoard());
-    const setStartTime = (value) => dispatch(action.setStartTime(value));
-    const incrementScore = (value) => dispatch(action.incrementScore(value));
-    const decrementTimePerMove = (value) => dispatch(action.decrementTimePerMove(value));
-    const incrementFailCounter = (value) => dispatch(action.incrementFailCounter(value));
 
     const eventClick = (i) => {
 
@@ -29,19 +24,19 @@ const GameBoard = (props) => {
             const value = gameField[i];
             if (value === gameObj.mole) {
 
-                incrementScore(10);
+                dispatch(action.incrementScore(10));
                 setTimersID(setTimeout(() => {
 
-                    resetGameBoard();
-                    setStartTime();
+                    dispatch(action.resetGameBoard());
+                    dispatch(action.setStartTime(value));
 
                 }, 40));
-                if (score % 30 === 0) decrementTimePerMove(1);
+                if (score % 30 === 0) dispatch(action.decrementTimePerMove(1));
 
             }
             if (value === gameObj.hole) {
 
-                incrementFailCounter(1);
+                dispatch(action.incrementFailCounter(1));
 
             }
 
@@ -66,7 +61,7 @@ const GameBoard = (props) => {
                         <CellGame img={img} sizeBoardCell={sizeBoardCell}
                             key={i.toString()}
                             isCorrectClick={gameField[i] === gameObj.mole}
-                            onClick={() => eventClick(i)} />
+                            eventClick={() => eventClick(i)} />
                     );
 
                 })
