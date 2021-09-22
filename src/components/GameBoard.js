@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import hole from '../img/hole.png';
-import mole from '../img/mole.png';
 import CellGame from './CellGame';
 import gameObj from '../enum/gameObj';
 import * as action from '../redux/action';
@@ -53,18 +51,12 @@ const GameBoard = (props) => {
         <ul className='game-container__board'
             style={{ width: `${widthBoard}px` }}>
             {
-                gameField.map((elem, i) => {
+                gameField.map((elem, i) => (
 
-                    const img = elem === gameObj.mole ? mole : hole;
-                    return (
-
-                        <CellGame img={img} sizeBoardCell={sizeBoardCell}
-                            key={i.toString()}
-                            isCorrectClick={gameField[i] === gameObj.mole}
-                            eventClick={() => eventClick(i)} />
-                    );
-
-                })
+                    <CellGame elem={elem} sizeBoardCell={sizeBoardCell}
+                        key={i.toString()}
+                        eventClick={() => eventClick(i)} />
+                ))
             }
         </ul>
 
